@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaLinkedin } from "react-icons/fa";
 export interface ProfessorData {
   name: string;
   title: string;
@@ -59,7 +59,7 @@ const ProfessorHero: React.FC<ProfessorHeroProps> = ({ professorData }) => {
                   className="text-slate-600 hover:text-blue-600 transition-colors duration-300 text-2xl"
                   aria-label="LinkedIn Profile"
                 >
-                  LinkedIn
+                 <FaLinkedin/>
                 </a>
               </div>
               <div className="flex space-x-4">
@@ -73,7 +73,7 @@ const ProfessorHero: React.FC<ProfessorHeroProps> = ({ professorData }) => {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative w-[200px] md:w-[400px] lg:w-[500px] mx-auto">
             <div className="aspect-w-1 aspect-h-1 rounded-full overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <img
                 src={professorData.image}

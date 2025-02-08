@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
-import AdminHome from "@/components/SideBarAdmin";
 
 const Page = () => {
   const router = useRouter();
@@ -45,17 +44,21 @@ const Page = () => {
 
     const formData = new FormData();
     formData.append("file", newImage);
-    formData.append("upload_preset", "your_upload_preset"); // Cloudinary preset
+    formData.append(
+      "upload_preset",
+      process.env.CLOUDINARY_UPLOAD_PRESET as string
+    ); // Cloudinary preset
 
     try {
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload",
+        `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
           method: "POST",
           body: formData,
         }
       );
       const data = await res.json();
+      console.log(data);
       return data.secure_url; // Return Cloudinary image URL
     } catch (error) {
       console.error("Image upload failed:", error);
@@ -65,10 +68,10 @@ const Page = () => {
 
   const handleUpdate = async () => {
     setUpdating(true);
-    const imageUrl = await handleImageUpload();
 
     try {
-      const response = await fetch("/api/professor", {
+      const imageUrl = await handleImageUpload();
+      const response = await fetch("/api/hero", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...professor, image: imageUrl }),
@@ -114,7 +117,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, name: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div>
@@ -125,7 +128,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, title: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div>
@@ -136,7 +139,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, credentials: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div>
@@ -147,7 +150,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, department: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div>
@@ -158,7 +161,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, university: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div>
@@ -169,7 +172,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, specialization: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div className="col-span-2">
@@ -180,7 +183,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, tagline: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div className="col-span-2">
@@ -191,7 +194,7 @@ const Page = () => {
               onChange={(e) =>
                 setProfessor({ ...professor, linkedinUrl: e.target.value })
               }
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border p-2 rounded mt-1 text-black"
             />
           </div>
           <div className="col-span-2">

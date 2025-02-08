@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
+import AdminHome from "@/components/SideBarAdmin";
 
 const Page = () => {
   const router = useRouter();
@@ -91,122 +92,125 @@ const Page = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto bg-[#09093d] p-8 shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold mb-6 text-center">
-        Admin Dashboard - Hero Section
-      </h2>
-      <div className="flex justify-center mb-6">
-        <img
-          src={professor.image}
-          alt="Professor"
-          className="w-32 h-32 rounded-full border-2 shadow-md object-cover"
-        />
+    <>
+      {/* <AdminHome /> */}
+      <div className="max-w-4xl mx-auto bg-[#09093d] p-8 mt-2 shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold mb-6 text-center">
+          Admin Dashboard - Hero Section
+        </h2>
+        <div className="flex justify-center mb-6">
+          <img
+            src={professor.image}
+            alt="Professor"
+            className="w-32 h-32 rounded-full border-2 shadow-md object-cover"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium">Name</label>
+            <input
+              type="text"
+              value={professor.name}
+              onChange={(e) =>
+                setProfessor({ ...professor, name: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Title</label>
+            <input
+              type="text"
+              value={professor.title}
+              onChange={(e) =>
+                setProfessor({ ...professor, title: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Credentials</label>
+            <input
+              type="text"
+              value={professor.credentials}
+              onChange={(e) =>
+                setProfessor({ ...professor, credentials: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Department</label>
+            <input
+              type="text"
+              value={professor.department}
+              onChange={(e) =>
+                setProfessor({ ...professor, department: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">University</label>
+            <input
+              type="text"
+              value={professor.university}
+              onChange={(e) =>
+                setProfessor({ ...professor, university: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Specialization</label>
+            <input
+              type="text"
+              value={professor.specialization}
+              onChange={(e) =>
+                setProfessor({ ...professor, specialization: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="block text-sm font-medium">Tagline</label>
+            <input
+              type="text"
+              value={professor.tagline}
+              onChange={(e) =>
+                setProfessor({ ...professor, tagline: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="block text-sm font-medium">LinkedIn URL</label>
+            <input
+              type="text"
+              value={professor.linkedinUrl}
+              onChange={(e) =>
+                setProfessor({ ...professor, linkedinUrl: e.target.value })
+              }
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="block text-sm font-medium">Update Image</label>
+            <input
+              type="file"
+              onChange={(e) => setNewImage(e.target.files?.[0] || null)}
+            />
+          </div>
+        </div>
+        <button
+          onClick={handleUpdate}
+          disabled={updating}
+          className="w-full mt-6 bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700"
+        >
+          {updating ? "Updating..." : "Update"}
+        </button>
       </div>
-      <div className="grid grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium">Name</label>
-          <input
-            type="text"
-            value={professor.name}
-            onChange={(e) =>
-              setProfessor({ ...professor, name: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Title</label>
-          <input
-            type="text"
-            value={professor.title}
-            onChange={(e) =>
-              setProfessor({ ...professor, title: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Credentials</label>
-          <input
-            type="text"
-            value={professor.credentials}
-            onChange={(e) =>
-              setProfessor({ ...professor, credentials: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Department</label>
-          <input
-            type="text"
-            value={professor.department}
-            onChange={(e) =>
-              setProfessor({ ...professor, department: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">University</label>
-          <input
-            type="text"
-            value={professor.university}
-            onChange={(e) =>
-              setProfessor({ ...professor, university: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Specialization</label>
-          <input
-            type="text"
-            value={professor.specialization}
-            onChange={(e) =>
-              setProfessor({ ...professor, specialization: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div className="col-span-2">
-          <label className="block text-sm font-medium">Tagline</label>
-          <input
-            type="text"
-            value={professor.tagline}
-            onChange={(e) =>
-              setProfessor({ ...professor, tagline: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div className="col-span-2">
-          <label className="block text-sm font-medium">LinkedIn URL</label>
-          <input
-            type="text"
-            value={professor.linkedinUrl}
-            onChange={(e) =>
-              setProfessor({ ...professor, linkedinUrl: e.target.value })
-            }
-            className="w-full border p-2 rounded mt-1"
-          />
-        </div>
-        <div className="col-span-2">
-          <label className="block text-sm font-medium">Update Image</label>
-          <input
-            type="file"
-            onChange={(e) => setNewImage(e.target.files?.[0] || null)}
-          />
-        </div>
-      </div>
-      <button
-        onClick={handleUpdate}
-        disabled={updating}
-        className="w-full mt-6 bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700"
-      >
-        {updating ? "Updating..." : "Update"}
-      </button>
-    </div>
+    </>
   );
 };
 

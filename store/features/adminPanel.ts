@@ -11,8 +11,8 @@ const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
-    change: (state) => {
-      state.adminPage = !state.adminPage;
+    change: (state,action) => {
+      state.adminPage = action.payload;
     },
   },
 });

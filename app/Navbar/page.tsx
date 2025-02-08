@@ -129,14 +129,17 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa"; // Import icons for the hamburger menu
+import { usePathname } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to control mobile menu
-
+  const pathname = usePathname();
+  const isAdminPage = pathname.includes("admin");
+  if(isAdminPage)return null
   return (
     <motion.nav
-      className="bg-gray-600 bg-opacity-30 backdrop-blur-lg shadow-lg p-4 fixed w-full z-10 pr-20"
+      className="bg-gray-600 bg-opacity-30 backdrop-blur-lg shadow-lg p-1 md:p-4 fixed w-full z-10 pr-20"
       style={{
         margin: "20px 0", // Add top and bottom margin
         borderRadius: "12px", // Rounded corners for glass effect

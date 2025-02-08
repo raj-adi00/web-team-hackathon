@@ -2,7 +2,7 @@
 
 import React from "react";
 
-interface ProfessorData {
+export interface ProfessorData {
   name: string;
   title: string;
   credentials: string;
@@ -14,11 +14,12 @@ interface ProfessorData {
   linkedinUrl: string;
 }
 
-interface ProfessorHeroProps {
+export interface ProfessorHeroProps {
   professorData: ProfessorData;
 }
 
 const ProfessorHero: React.FC<ProfessorHeroProps> = ({ professorData }) => {
+    if(!professorData)return <div>Loading...</div>
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">

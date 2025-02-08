@@ -1,5 +1,3 @@
-// components/ProfessorHero.tsx
-
 import React from "react";
 
 export interface ProfessorData {
@@ -19,7 +17,7 @@ export interface ProfessorHeroProps {
 }
 
 const ProfessorHero: React.FC<ProfessorHeroProps> = ({ professorData }) => {
-    if(!professorData)return <div>Loading...</div>
+  if (!professorData) return <div></div>;
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">

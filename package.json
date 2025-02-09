@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lexical/react": "^0.24.0",
     "@reduxjs/toolkit": "^2.5.1",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
     "cloudinary": "^2.5.1",
     "framer-motion": "^12.4.1",
     "mongodb": "^6.13.0",

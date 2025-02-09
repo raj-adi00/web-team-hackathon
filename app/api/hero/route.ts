@@ -90,7 +90,7 @@ export const PATCH = async (req: Request) => {
     const oldImage = professor.image;
 
     Object.keys(body).forEach((key) => {
-      const typedKey = key as keyof IHero; // Ensure correct key type
+      const typedKey = key as keyof IHero;
       if (body[typedKey] !== professor[typedKey]) {
         updatedFields[typedKey] = body[typedKey];
       }

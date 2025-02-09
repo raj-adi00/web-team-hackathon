@@ -11,6 +11,7 @@ export interface IHero extends Document {
   tagline: string;
   image: string;
   linkedinUrl: string;
+  about: String;
 }
 
 const HeroSchema = new Schema<IHero>(
@@ -24,6 +25,7 @@ const HeroSchema = new Schema<IHero>(
     tagline: { type: String, required: true },
     image: { type: String, required: true },
     linkedinUrl: { type: String, required: true },
+    about: { type: String, required: true },
   },
   { timestamps: true }
 );

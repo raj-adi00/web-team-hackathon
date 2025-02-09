@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/utility/dbConnect";
 import Blog from "@/utility/models/Blog";
+import mongoose from "mongoose";
 
 export async function PATCH(
   req: NextRequest,
@@ -8,12 +9,13 @@ export async function PATCH(
 ) {
   try {
     await dbConnect();
-    const { id } = params;
-    if (!id)
-      return NextResponse.json(
-        { message: "Blog ID is required" },
-        { status: 400 }
-      );
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // Extract ID from the path
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid Blog ID" }, { status: 400 });
+    }
+
     const updates = await req.json();
 
     const updatedBlog = await Blog.findByIdAndUpdate(id, updates, {
@@ -30,37 +32,45 @@ export async function PATCH(
     );
   }
 }
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-    try {
-      await dbConnect();
-      
-      // Extract `id` from URL params
-      if (!params || !params.id) {
-        return NextResponse.json({ message: "Blog ID is required" }, { status: 400 });
-      }
-      const {id} = params;
-      const blog = await Blog.findById(id);
-      if (!blog) {
-        return NextResponse.json({ message: "Blog not found" }, { status: 404 });
-      }
-      return NextResponse.json(blog);
-    } catch (error) {
-      console.error("Error fetching blog:", error);
-      return NextResponse.json({ message: "Error fetching blog" }, { status: 500 });
+export async function GET(req: NextRequest) {
+  try {
+    await dbConnect();
+
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop();
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid Blog ID" }, { status: 400 });
     }
+
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(blog);
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    return NextResponse.json(
+      { message: "Error fetching blog" },
+      { status: 500 }
+    );
   }
+}
+
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
     await dbConnect();
-    const { id } = params;
-    if (!id)
-      return NextResponse.json(
-        { message: "Blog ID is required" },
-        { status: 400 }
-      );
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // Extract ID from the path
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid Blog ID" }, { status: 400 });
+    }
+
     const deletedBlog = await Blog.findByIdAndDelete(id);
     if (!deletedBlog)
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });

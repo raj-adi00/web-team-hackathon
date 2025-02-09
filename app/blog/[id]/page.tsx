@@ -67,7 +67,7 @@ const BlogDetails = () => {
           </motion.span>
         ))}
       </h2>
-      <div className="flex gap-2 items-center justify-center">
+      <div className="flex gap-2 items-center justify-around">
         {blog.imageUrl && (
           <motion.img
             src={blog.imageUrl}

@@ -155,6 +155,7 @@ const AdminBlogPage = () => {
             if (!e.target.files?.[0]) return;
 
             try {
+                setLoading(true)
               console.log("Uploading image...");
               const url = await uploadToCloudinary(e.target.files[0], "image");
               console.log("Upload successful:", url);
@@ -162,6 +163,8 @@ const AdminBlogPage = () => {
             } catch (error) {
               console.error("Image upload failed:", error);
               alert("Image upload failed. Please try again.");
+            }finally{
+                setLoading(false)
             }
           }}
           className="w-full p-2 mb-2"
@@ -175,6 +178,7 @@ const AdminBlogPage = () => {
             if (!e.target.files?.[0]) return;
 
             try {
+                setLoading(true)
               console.log("Uploading video...");
               const url = await uploadToCloudinary(e.target.files[0], "video");
               console.log("Upload successful:", url);
@@ -182,17 +186,19 @@ const AdminBlogPage = () => {
             } catch (error) {
               console.error("Upload failed:", error);
               alert("Video upload failed. Please try again.");
+            }finally{
+                setLoading(false)
             }
           }}
         />
-        <div className="flex gap-2">
+        <div className="flex gap-2 my-2 flex-wrap">
           {formData.videoUrl && editingId && (
             <button
               type="button"
               className="bg-red-500 text-white px-2 py-1 rounded ml-2"
               onClick={() => setFormData((prev) => ({ ...prev, videoUrl: "" }))}
             >
-              Remove Video
+              Remove existing Video
             </button>
           )}
           {formData.imageUrl && editingId && (
@@ -201,7 +207,7 @@ const AdminBlogPage = () => {
               className="bg-red-500 text-white px-2 py-1 rounded ml-2"
               onClick={() => setFormData((prev) => ({ ...prev, imageUrl: "" }))}
             >
-              Remove Video
+              Remove existing Image
             </button>
           )}
         </div>

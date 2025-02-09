@@ -95,15 +95,15 @@ const BlogList = () => {
                 transition: { duration: 0.2 },
               }}
               whileTap={{ scale: 0.98 }}
-              className="group bg-gray-900 backdrop-blur-sm rounded-lg shadow-lg cursor-pointer border border-gray-700/50 gap-2 hover:border-blue-500/90 transition-all duration-300 p-6 text-center justify-center flex flex-col items-center"
+              className="group bg-gray-900 backdrop-blur-sm rounded-lg shadow-lg cursor-pointer border border-gray-700/50 gap-5 hover:border-blue-500/90 transition-all duration-300 p-6 text-center justify-center flex flex-col items-center h-60"
               onClick={() => router.push(`/blog/${blog._id}`)}
             >
               <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
                 {blog.heading}
               </h3>
               <div className="text-gray-400 text-sm">
-                {blog.body.split(" ").slice(0, 10).join(" ")}
-                {blog.body.split(" ").length > 10 && "..."}
+                {blog.body.split(" ").slice(0, 20).join(" ")}
+                {blog.body.split(" ").length > 20 && "..."}
               </div>
 
               <motion.div

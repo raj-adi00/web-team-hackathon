@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
@@ -41,7 +41,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       dispatch(change(true)); // Set adminPage to true
     } else dispatch(change(false));
   }, [pathname, dispatch]);
-
+  
   return (
     <html lang="en">
       <Head>

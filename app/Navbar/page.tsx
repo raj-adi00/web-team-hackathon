@@ -110,13 +110,6 @@ const Navbar: React.FC = () => {
                   >
                     Awards
                   </Link>
-                  <Link
-                    href="/collaborations"
-                    className="block px-4 py-2 text-sm hover:bg-blue-100"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    Collaborations
-                  </Link>
                 </div>
               )}
             </div>
@@ -200,13 +193,6 @@ const Navbar: React.FC = () => {
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       Awards
-                    </Link>
-                    <Link
-                      href="/collaborations"
-                      className="block px-4 py-2 text-sm hover:bg-blue-100"
-                      onClick={() => setIsDropdownOpen(false)}
-                    >
-                      Collaborations
                     </Link>
                   </div>
                 )}

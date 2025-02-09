@@ -46,15 +46,15 @@ const ProjectDetails = () => {
     return <p className="text-center text-red-500">Project not found.</p>;
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="mx-auto p-6 bg-gray-200 w-[95vw]">
       {project.imageUrl && (
         <img
           src={project.imageUrl}
           alt={project.title}
-          className="w-full h-60 object-cover rounded-md"
+          className="w-1/2 h-60 object-cover rounded-md mx-auto"
         />
       )}
-      <h1 className="text-2xl font-bold mt-4">{project.title}</h1>
+      <h1 className="text-2xl font-bold mt-4 text-blue-950">{project.title}</h1>
       <p className="text-gray-700 mt-2">{project.description}</p>
 
       <p className="text-sm text-gray-500 mt-4">

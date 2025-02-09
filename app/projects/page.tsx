@@ -58,7 +58,13 @@ const ProjectsPage = () => {
               <h2 className="text-lg mt-2 text-black font-bold">
                 {project.title}
               </h2>
-              <p className="text-gray-700">{project.description}</p>
+              <p className="text-gray-700">
+                {project.description.split(" ").length > 15
+                  ? project.description.split(" ").slice(0, 15).join(" ") +
+                    "..."
+                  : project.description}
+              </p>
+
               <p className="text-sm text-gray-500">
                 <strong>Technologies:</strong> {project.technologies.join(", ")}
               </p>

@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     const body = await req.json();
+    console.log(body)
     const project = new Project(body);
     await project.save();
 

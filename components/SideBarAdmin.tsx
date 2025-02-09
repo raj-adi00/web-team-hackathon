@@ -46,6 +46,17 @@ const AdminHome = () => {
           >
             <FaUserShield className="mr-3" /> About Section
           </button>
+          <button
+            className={`flex items-center p-3 rounded-lg transition ${
+              activeSection === "education" ? "bg-gray-700" : "hover:bg-gray-800"
+            }`}
+            onClick={() => {
+              router.push("/admin/education");
+              setActiveSection("education");
+            }}
+          >
+            <FaUserShield className="mr-3" /> Education
+          </button>
         </nav>
       </aside>
 

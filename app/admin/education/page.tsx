@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/Loader";
 import React, { useEffect, useState } from "react";
 
 interface Education {
@@ -106,7 +107,7 @@ const AdminEducation: React.FC = () => {
     }
   };
 
-  if (loading) return <p className="text-center text-white">Loading...</p>;
+  if (loading) return <Loader/>
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (

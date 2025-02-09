@@ -155,7 +155,7 @@ const AdminBlogPage = () => {
             if (!e.target.files?.[0]) return;
 
             try {
-                setLoading(true)
+              setLoading(true);
               console.log("Uploading image...");
               const url = await uploadToCloudinary(e.target.files[0], "image");
               console.log("Upload successful:", url);
@@ -163,8 +163,8 @@ const AdminBlogPage = () => {
             } catch (error) {
               console.error("Image upload failed:", error);
               alert("Image upload failed. Please try again.");
-            }finally{
-                setLoading(false)
+            } finally {
+              setLoading(false);
             }
           }}
           className="w-full p-2 mb-2"
@@ -178,7 +178,7 @@ const AdminBlogPage = () => {
             if (!e.target.files?.[0]) return;
 
             try {
-                setLoading(true)
+              setLoading(true);
               console.log("Uploading video...");
               const url = await uploadToCloudinary(e.target.files[0], "video");
               console.log("Upload successful:", url);
@@ -186,8 +186,8 @@ const AdminBlogPage = () => {
             } catch (error) {
               console.error("Upload failed:", error);
               alert("Video upload failed. Please try again.");
-            }finally{
-                setLoading(false)
+            } finally {
+              setLoading(false);
             }
           }}
         />
@@ -226,11 +226,11 @@ const AdminBlogPage = () => {
       <div className="grid gap-4">
         {blogs.map((blog) => (
           <div key={blog._id} className="p-4 bg-gray-800 rounded-lg shadow-md">
+            <p className="text-black font-semibold text-sm">ID: {blog._id}</p>
             <h3 className="text-xl font-bold text-white">{blog.heading}</h3>
             <p className="text-gray-300 mt-2">{blog.body}</p>
             {blog.imageUrl && (
-            //   <div className="flex items-center justify-between bg-gray-700 p-2 rounded">
-                <p className="text-gray-400 mt-1">Image: {blog.imageUrl}</p>
+              <p className="text-gray-400 mt-1">Image: {blog.imageUrl}</p>
             )}
 
             {blog.videoUrl && (

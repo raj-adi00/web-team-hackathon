@@ -54,32 +54,34 @@ export async function DELETE(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
-  try {
-    await dbConnect();
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-    // console.log(id)
-    if (!id) {
+export async function GET(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+  ) {
+    try {
+      await dbConnect();
+      const { id } = params;
+  
+      if (!id) {
+        return NextResponse.json(
+          { message: "Project ID is required" },
+          { status: 400 }
+        );
+      }
+  
+      const project = await Project.findById(id);
+      if (!project) {
+        return NextResponse.json(
+          { message: "Project not found" },
+          { status: 404 }
+        );
+      }
+  
+      return NextResponse.json({ project }, { status: 200 });
+    } catch (error) {
       return NextResponse.json(
-        { message: "Project ID is required" },
-        { status: 400 }
+        { message: "Error fetching project", error },
+        { status: 500 }
       );
     }
-
-    const project = await Project.findById(id);
-    if (!project) {
-      return NextResponse.json(
-        { message: "Project not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json({ project }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Error fetching project", error },
-      { status: 500 }
-    );
   }
-}

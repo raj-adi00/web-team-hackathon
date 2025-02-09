@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { Editor } from "@tinymce/tinymce-react";
 import Loader from "@/components/Loader";
 
 const AboutPage = () => {
@@ -11,6 +10,7 @@ const AboutPage = () => {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
+  // Fetch About Content from API
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
@@ -30,17 +30,10 @@ const AboutPage = () => {
     fetchAboutData();
   }, [router]);
 
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: aboutContent,
-    onUpdate: ({ editor }) => {
-      setAboutContent(editor.getHTML()); // Convert to HTML
-    },
-  });
-
+  // Handle Update
   const handleUpdate = async () => {
     if (!aboutContent) return;
-    
+
     setUpdating(true);
     try {
       const response = await fetch("/api/about", {
@@ -70,18 +63,31 @@ const AboutPage = () => {
 
       {/* Current Content Preview */}
       <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-        <h3 className="text-lg font-bold mb-2 text-black">Current About Section</h3>
+        <h3 className="text-lg font-bold mb-2 text-black">
+          Current About Section
+        </h3>
         <div className="prose max-w-none dark:prose-invert text-black">
-          {aboutContent && <div dangerouslySetInnerHTML={{ __html: aboutContent }} />}
+          {aboutContent && (
+            <div dangerouslySetInnerHTML={{ __html: aboutContent }} />
+          )}
         </div>
       </div>
 
-      {/* Tiptap Editor */}
+      {/* TinyMCE Editor */}
       <div className="bg-white p-4 rounded-lg shadow-md text-black">
         <h3 className="text-lg font-bold mb-2">Edit About Section</h3>
-        <div className="border p-2 rounded-lg text-black">
-          <EditorContent editor={editor} className="min-h-[200px] px-4 py-2 focus:outline-none" />
-        </div>
+        <Editor
+          apiKey="slud29o0b1xa9wx0gntgbx4rbdbxgd2v2o7rp3spoweiaoks" // Optional, TinyMCE requires an API key for cloud services
+          value={aboutContent}
+          onEditorChange={(content) => setAboutContent(content)}
+          init={{
+            height: 300,
+            menubar: false,
+            plugins: "lists link image table code help wordcount",
+            toolbar:
+              "undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | code",
+          }}
+        />
       </div>
 
       {/* Update Button */}

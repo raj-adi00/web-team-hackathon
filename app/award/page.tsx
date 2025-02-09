@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Award as AwardIcon, Loader, Star } from "lucide-react";
+import { Award as AwardIcon, Loader, Sparkle, Star } from "lucide-react";
+import SparkleBackground from "@/components/SparkleBackground";
 
 interface Award {
   _id: string;
@@ -39,16 +40,16 @@ const AwardsPage = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: -20,
-      scale: 0.95
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
@@ -56,20 +57,20 @@ const AwardsPage = () => {
       scale: 1,
       transition: {
         type: "spring",
-        duration: 0.5
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   return (
     <div className="min-h-screen bg-white py-12 px-4">
-      <motion.div 
+      <motion.div
         className="max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <motion.div 
+        <motion.div
           className="flex items-center justify-center gap-3 mb-12 bg-blue-950"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,12 +83,10 @@ const AwardsPage = () => {
           <AwardIcon className="w-8 h-8 text-yellow-400" />
         </motion.div>
 
-        {loading && (
-          <Loader/>
-        )}
+        {loading && <Loader />}
 
         {error && (
-          <motion.p 
+          <motion.p
             className="text-center text-red-400 bg-red-900/20 py-4 rounded-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -97,7 +96,7 @@ const AwardsPage = () => {
         )}
 
         {!loading && !error && awards.length === 0 && (
-          <motion.p 
+          <motion.p
             className="text-center text-gray-400 bg-white/5 py-8 rounded-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -107,7 +106,7 @@ const AwardsPage = () => {
         )}
 
         {!loading && !error && awards.length > 0 && (
-          <motion.ul 
+          <motion.ul
             className="space-y-6"
             variants={containerVariants}
             initial="hidden"
@@ -118,8 +117,9 @@ const AwardsPage = () => {
                 key={award._id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl hover:shadow-2xl transition-shadow bg-blue-950"
+                className="backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl hover:shadow-2xl transition-shadow bg-blue-950/90"
               >
+                <SparkleBackground />
                 <div className="flex items-start gap-4">
                   <div className="mt-1">
                     <Star className="w-6 h-6 text-yellow-400" />

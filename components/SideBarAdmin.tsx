@@ -33,7 +33,7 @@ const AdminHome = () => {
               setActiveSection("hero");
             }}
           >
-            <FaUserShield className="mr-3" /> Hero Section
+            <FaUserShield className="mr-3" /> Hero
           </button>
           <button
             className={`flex items-center p-3 rounded-lg transition ${
@@ -44,7 +44,7 @@ const AdminHome = () => {
               setActiveSection("about");
             }}
           >
-            <FaUserShield className="mr-3" /> About Section
+            <FaUserShield className="mr-3" /> About
           </button>
           <button
             className={`flex items-center p-3 rounded-lg transition ${

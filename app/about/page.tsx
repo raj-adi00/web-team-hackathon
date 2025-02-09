@@ -90,7 +90,7 @@ export default function AboutPage() {
 
   return (
     <motion.div
-      className="min-h-screen p-6 bg-white"
+      className="p-6 bg-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}

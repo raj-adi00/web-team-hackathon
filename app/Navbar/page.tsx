@@ -149,16 +149,12 @@ const Navbar: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-10 lg:px-20">
         <div className="flex justify-between items-center">
           {/* Logo/Brand */}
           <div className="text-2xl font-bold text-gray-800">
             <Link href="/">My Portfolio</Link>
           </div>
-
-          {/* Hamburger Icon for Mobile */}
-
-          {/* Navbar Links (Desktop) */}
           <div
             className={`hidden md:flex space-x-8 ${
               isMobileMenuOpen ? "block" : "hidden"

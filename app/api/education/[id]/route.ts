@@ -6,7 +6,17 @@ import Education from "@/utility/models/Education";
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
-    const updatedEducation = await Education.findByIdAndUpdate(params.id, await req.json(), { new: true });
+    
+    // Ensure ID exists
+    if (!params || !params.id) {
+      return NextResponse.json({ message: "Missing education ID" }, { status: 400 });
+    }
+
+    // Parse request body
+    const data = await req.json();
+    
+    // Update record
+    const updatedEducation = await Education.findByIdAndUpdate(params.id, data, { new: true });
 
     if (!updatedEducation) {
       return NextResponse.json({ message: "Education record not found" }, { status: 404 });
@@ -14,6 +24,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
     return NextResponse.json(updatedEducation, { status: 200 });
   } catch (error) {
+    console.error("Error updating education:", error);
     return NextResponse.json({ message: "Error updating education record" }, { status: 500 });
   }
 }
@@ -22,6 +33,13 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
+
+    // Ensure ID exists
+    if (!params || !params.id) {
+      return NextResponse.json({ message: "Missing education ID" }, { status: 400 });
+    }
+
+    // Delete record
     const deletedEducation = await Education.findByIdAndDelete(params.id);
 
     if (!deletedEducation) {
@@ -30,6 +48,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
     return NextResponse.json({ message: "Education record deleted successfully" }, { status: 200 });
   } catch (error) {
+    console.error("Error deleting education:", error);
     return NextResponse.json({ message: "Error deleting education record" }, { status: 500 });
   }
 }
